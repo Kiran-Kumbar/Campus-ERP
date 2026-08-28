@@ -1,26 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, Users, BookOpen, Calendar, FileText, Settings, ShieldCheck, GraduationCap, ChevronLeft, ChevronRight } from "lucide-react";
+import { 
+  LayoutDashboard, Users, BookOpen, Calendar, FileText, Settings, 
+  ShieldCheck, GraduationCap, ChevronLeft, ChevronRight, Briefcase, 
+  Receipt, MessageSquare, BookMarked
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { useRole, ERPRole } from "./role-context";
 
-const navigation = [
-  { name: 'Overview', href: '/overview', icon: LayoutDashboard },
-  { name: 'Admissions', href: '/admissions', icon: ShieldCheck },
-  { name: 'Students', href: '/students', icon: Users },
-  { name: 'Academics', href: '/academics', icon: BookOpen },
-  { name: 'Attendance', href: '/attendance', icon: Calendar },
-  { name: 'Examinations', href: '/examinations', icon: FileText },
-  { name: 'Finance', href: '/finance', icon: GraduationCap },
-  { name: 'Administration', href: '/admin', icon: Settings },
-];
+interface NavItem {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const ROLE_NAVIGATION: Record<ERPRole, NavItem[]> = {
+  principal: [
+    { name: 'Overview', href: '/overview', icon: LayoutDashboard },
+    { name: 'Admissions', href: '/admissions', icon: ShieldCheck },
+    { name: 'Students', href: '/students', icon: Users },
+    { name: 'Academics', href: '/academics', icon: BookOpen },
+    { name: 'Attendance', href: '/attendance', icon: Calendar },
+    { name: 'Examinations', href: '/examinations', icon: FileText },
+    { name: 'Student Fees', href: '/finance', icon: GraduationCap },
+    { name: 'Accounting & Payables', href: '/accounting', icon: Receipt },
+    { name: 'HRMS & Staff', href: '/hrms', icon: Briefcase },
+    { name: 'Administration', href: '/admin', icon: Settings },
+  ],
+  teacher: [
+    { name: 'My Dashboard', href: '/overview', icon: LayoutDashboard },
+    { name: 'My Classes', href: '/academics', icon: BookOpen },
+    { name: 'Class Attendance', href: '/attendance', icon: Calendar },
+    { name: 'Marks & Exams', href: '/examinations', icon: FileText },
+    { name: 'My Students', href: '/students', icon: Users },
+    { name: 'HR / My Leave', href: '/hrms', icon: Briefcase },
+  ],
+  accountant: [
+    { name: 'Finance Overview', href: '/overview', icon: LayoutDashboard },
+    { name: 'Fee Collections', href: '/finance', icon: GraduationCap },
+    { name: 'Accounting & Payables', href: '/accounting', icon: Receipt },
+    { name: 'Reports & Audits', href: '/admin', icon: Settings },
+  ],
+  hr: [
+    { name: 'HR Dashboard', href: '/overview', icon: LayoutDashboard },
+    { name: 'HRMS & Payroll', href: '/hrms', icon: Briefcase },
+    { name: 'Staff Directory', href: '/students', icon: Users },
+    { name: 'Admin Settings', href: '/admin', icon: Settings },
+  ],
+  parent: [
+    { name: 'Child Dashboard', href: '/overview', icon: LayoutDashboard },
+    { name: 'Attendance', href: '/attendance', icon: Calendar },
+    { name: 'Report Cards', href: '/examinations', icon: FileText },
+    { name: 'Fee Receipts', href: '/finance', icon: GraduationCap },
+  ],
+  student: [
+    { name: 'My Dashboard', href: '/overview', icon: LayoutDashboard },
+    { name: 'My Courses', href: '/academics', icon: BookOpen },
+    { name: 'My Attendance', href: '/attendance', icon: Calendar },
+    { name: 'Exam Grades', href: '/examinations', icon: FileText },
+  ],
+};
 
 export function Sidebar() {
   const pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(true);
+  const { role, roleDetails } = useRole();
+
+  const currentNav = ROLE_NAVIGATION[role] || ROLE_NAVIGATION.principal;
 
   return (
     <aside className={cn(
@@ -50,7 +100,7 @@ export function Sidebar() {
       </div>
       
       <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1 overflow-x-hidden">
-        {navigation.map((item) => {
+        {currentNav.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (
             <Link
@@ -61,7 +111,7 @@ export function Sidebar() {
                 "flex items-center py-2 text-sm font-medium rounded-[10px] transition-colors",
                 isExpanded ? "px-3" : "px-0 justify-center",
                 isActive 
-                  ? "bg-[#F1F1EC] text-brand" 
+                  ? "bg-[#F1F1EC] text-brand font-semibold" 
                   : "text-secondary hover:bg-canvas hover:text-primary"
               )}
             >
@@ -79,17 +129,17 @@ export function Sidebar() {
       </nav>
 
       <div className={cn(
-        "p-4 border-t border-border flex items-center",
+        "p-4 border-t border-border flex items-center bg-canvas/40",
         isExpanded ? "justify-start" : "justify-center"
       )}>
         <div className="flex items-center overflow-hidden">
-          <div className="h-8 w-8 rounded-full bg-canvas border border-border flex items-center justify-center text-sm font-bold text-primary shrink-0">
-            AD
+          <div className="h-8 w-8 rounded-full bg-brand text-white border border-brand flex items-center justify-center text-xs font-bold shrink-0">
+            {roleDetails.avatar}
           </div>
           {isExpanded && (
-            <div className="ml-3 whitespace-nowrap">
-              <p className="text-sm font-medium text-primary">Admin User</p>
-              <p className="text-xs font-medium text-muted">Principal</p>
+            <div className="ml-3 whitespace-nowrap overflow-hidden">
+              <p className="text-sm font-semibold text-primary truncate">{roleDetails.name}</p>
+              <p className="text-xs text-muted truncate">{roleDetails.title}</p>
             </div>
           )}
         </div>
@@ -97,3 +147,4 @@ export function Sidebar() {
     </aside>
   );
 }
+
