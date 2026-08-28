@@ -17,10 +17,6 @@ async function seed() {
     institutionId: institution.id,
     name: "Main Campus",
     address: "123 Education Blvd",
-    city: "Mumbai",
-    state: "MH",
-    zipCode: "400001",
-    country: "India",
   }).returning();
   console.log(`Created Campus: ${campus.name}`);
 
@@ -57,8 +53,8 @@ async function seed() {
       userId: studentUser.id,
       campusId: campus.id,
       dateOfBirth: new Date(2010, 0, i + 1), // Jan 2010
-      gender: i % 2 === 0 ? "male" : "female",
-      status: "Active",
+      gender: (i % 2 === 0 ? "male" : "female") as "male" | "female",
+      status: "Active" as const,
     });
   }
   
