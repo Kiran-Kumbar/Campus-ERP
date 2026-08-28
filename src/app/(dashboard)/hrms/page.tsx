@@ -115,7 +115,7 @@ export default function HRMSPage() {
             <DollarSign className="h-5 w-5 text-brand" />
           </div>
           <p className="text-2xl font-bold text-primary">₹1.18 Cr</p>
-          <p className="text-xs text-emerald-600 mt-1">August Payroll Processed ✅</p>
+          <p className="text-xs text-emerald-600 mt-1">August Payroll Processed</p>
         </div>
       </div>
 

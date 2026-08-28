@@ -149,7 +149,7 @@ export default function AccountingPage() {
                     )}
                     {inv.status === "paid" && (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
-                        Paid ✅
+                        Paid
                       </span>
                     )}
                   </td>

@@ -3,7 +3,7 @@ import { institutions, campuses, roles, users, students } from "./schema";
 import { eq } from "drizzle-orm";
 
 async function seed() {
-  console.log("🌱 Seeding database...");
+  console.log("Seeding database...");
 
   // 1. Create Institution
   const [institution] = await db.insert(institutions).values({
@@ -61,11 +61,11 @@ async function seed() {
   await db.insert(students).values(dummyStudents);
   console.log(`Created 10 Students`);
 
-  console.log("✅ Seeding complete!");
+  console.log("Seeding complete!");
 }
 
 seed().catch((e) => {
-  console.error("❌ Seeding failed!");
+  console.error("Seeding failed!");
   console.error(e);
   process.exit(1);
 });

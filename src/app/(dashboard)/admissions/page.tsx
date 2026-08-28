@@ -135,7 +135,7 @@ export default function AdmissionsPage() {
           <p className="text-2xl font-bold text-emerald-700 mt-2">
             {applications.filter(a => a.status === "Offer Accepted").length}
           </p>
-          <p className="text-xs text-emerald-600 mt-1 font-medium">Deposit received ✅</p>
+          <p className="text-xs text-emerald-600 mt-1 font-medium">Deposit received</p>
         </div>
       </div>
 

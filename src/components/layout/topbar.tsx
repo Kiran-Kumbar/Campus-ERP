@@ -31,12 +31,12 @@ export function Topbar() {
               onChange={(e) => setRole(e.target.value as ERPRole)}
               className="bg-transparent font-semibold text-primary text-xs focus:outline-none cursor-pointer"
             >
-              <option value="principal">👑 Principal / Mgmt</option>
-              <option value="teacher">👩‍🏫 Teacher / Faculty</option>
-              <option value="accountant">💰 Accountant / Finance</option>
-              <option value="hr">👨‍💼 HR Manager</option>
-              <option value="parent">👨‍👩‍👧 Parent Portal</option>
-              <option value="student">🧑‍🎓 Student Portal</option>
+              <option value="principal">Principal / Mgmt</option>
+              <option value="teacher">Teacher / Faculty</option>
+              <option value="accountant">Accountant / Finance</option>
+              <option value="hr">HR Manager</option>
+              <option value="parent">Parent Portal</option>
+              <option value="student">Student Portal</option>
             </select>
           </div>
         </div>
