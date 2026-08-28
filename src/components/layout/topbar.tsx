@@ -1,17 +1,18 @@
 import { Bell, Search, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { MobileNav } from "./mobile-nav";
 
 export function Topbar() {
   return (
-    <header className="h-16 border-b border-border bg-surface flex items-center justify-between px-6 sticky top-0 z-10">
+    <header className="h-16 border-b border-border bg-surface flex items-center justify-between px-4 sm:px-6 sticky top-0 z-10">
       
-      {/* Context / Campus Switcher (as requested in PRD) */}
-      <div className="flex items-center text-sm font-medium text-primary">
-        <MapPin className="h-4 w-4 mr-2 text-muted" />
-        Riverview International Academy
-        <span className="mx-2 text-border">|</span>
-        <span className="text-secondary">Main Campus</span>
+      <div className="flex items-center text-sm font-medium text-primary flex-1 overflow-hidden mr-4">
+        <MobileNav />
+        <MapPin className="h-4 w-4 mr-2 text-muted shrink-0" />
+        <span className="hidden sm:inline-block truncate">Riverview International Academy</span>
+        <span className="hidden sm:inline-block mx-2 text-border">|</span>
+        <span className="text-secondary truncate">Main Campus</span>
       </div>
 
       <div className="flex items-center space-x-4">
