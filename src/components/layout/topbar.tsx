@@ -1,5 +1,6 @@
+"use client";
+
 import { Bell, Search, MapPin } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 
@@ -18,13 +19,14 @@ export function Topbar() {
       <div className="flex items-center space-x-4">
         
         {/* Global Search Shortcut */}
-        <div className="relative hidden md:flex items-center w-64">
-          <Search className="absolute left-2.5 h-4 w-4 text-muted" />
-          <Input 
-            type="search" 
-            placeholder="Search students, fees... (Cmd+K)" 
-            className="pl-9 h-8 bg-canvas border-transparent focus-visible:bg-surface focus-visible:border-brand"
-          />
+        <div 
+          className="hidden md:flex items-center relative w-64 cursor-text"
+          onClick={() => window.dispatchEvent(new Event("open-command-palette"))}
+        >
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted pointer-events-none" />
+          <div className="flex h-9 w-full items-center rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors pl-9 text-muted hover:border-brand/50">
+            Search students, fees... (Cmd+K)
+          </div>
         </div>
 
         {/* Notifications */}

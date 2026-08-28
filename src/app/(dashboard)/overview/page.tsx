@@ -95,33 +95,61 @@ export default function OverviewPage() {
         </div>
 
         <div className="bg-surface border border-border rounded-lg p-6 shadow-level-1 min-h-[400px]">
-          <h2 className="text-lg font-semibold text-primary mb-4 flex items-center justify-between">
-            Attention Required
-            <Badge variant="danger">3</Badge>
-          </h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-primary flex items-center gap-2">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-attention opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-attention"></span>
+              </span>
+              AI Risk Radar
+            </h2>
+            <Badge variant="danger" className="font-mono">3 At-Risk</Badge>
+          </div>
           
           <ul className="space-y-4">
-            <li className="flex gap-3 pb-4 border-b border-border">
-              <div className="w-2 h-2 mt-1.5 rounded-full bg-attention flex-shrink-0"></div>
-              <div>
-                <p className="text-sm font-medium text-primary">24 students below attendance threshold</p>
-                <p className="text-xs text-secondary mt-1">Academics</p>
+            
+            {/* Risk Item 1 */}
+            <li className="p-4 bg-canvas rounded-xl border border-border">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <p className="text-sm font-bold text-primary">Rohan Patel</p>
+                  <p className="text-xs text-secondary">Grade 11 • Sci</p>
+                </div>
+                <div className="flex flex-col items-end">
+                  <span className="text-xs font-bold text-attention">88% Risk</span>
+                  <span className="text-[10px] text-muted uppercase tracking-wider">Dropout</span>
+                </div>
               </div>
-            </li>
-            <li className="flex gap-3 pb-4 border-b border-border">
-              <div className="w-2 h-2 mt-1.5 rounded-full bg-warning flex-shrink-0"></div>
-              <div>
-                <p className="text-sm font-medium text-primary">12 applications missing documents</p>
-                <p className="text-xs text-secondary mt-1">Admissions</p>
+              <div className="bg-white p-2 rounded-lg border border-border text-xs text-secondary mb-3">
+                <strong className="text-primary block mb-1">AI Insight:</strong>
+                Attendance dropped to 62% over the last 14 days, concurrent with 2 missed assignments in Physics.
               </div>
+              <button className="w-full py-1.5 text-xs font-semibold text-white bg-attention rounded-lg shadow-sm hover:bg-red-700 transition-colors">
+                Intervene / Alert Counselor
+              </button>
             </li>
-            <li className="flex gap-3 pb-4 border-b border-border">
-              <div className="w-2 h-2 mt-1.5 rounded-full bg-warning flex-shrink-0"></div>
-              <div>
-                <p className="text-sm font-medium text-primary">₹7.4L outstanding fees due today</p>
-                <p className="text-xs text-secondary mt-1">Finance</p>
+
+            {/* Risk Item 2 */}
+            <li className="p-4 bg-canvas rounded-xl border border-border">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <p className="text-sm font-bold text-primary">Meera Singh</p>
+                  <p className="text-xs text-secondary">Grade 9 • Arts</p>
+                </div>
+                <div className="flex flex-col items-end">
+                  <span className="text-xs font-bold text-warning">74% Risk</span>
+                  <span className="text-[10px] text-muted uppercase tracking-wider">Academic</span>
+                </div>
               </div>
+              <div className="bg-white p-2 rounded-lg border border-border text-xs text-secondary mb-3">
+                <strong className="text-primary block mb-1">AI Insight:</strong>
+                Sudden 30% drop in Mathematics scores compared to previous term average.
+              </div>
+              <button className="w-full py-1.5 text-xs font-semibold text-primary bg-white border border-border rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                Schedule Parent Meeting
+              </button>
             </li>
+
           </ul>
         </div>
       </div>
